@@ -1,0 +1,44 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+
+<div class="headerContainer" fxLayout="row" fxLayoutAlign="flex-start">
+  <button mat-button="" routerLink="/landing"><mat-icon class="home">home</mat-icon></button>
+    <h1>To-Do List App</h1>
+
+
+</div>
+<div fxLayout="row" >
+  <div class="cardListContainer" fxLayout="column">
+    <!--When list is empty-->
+    <mat-card class="doneCard"
+      *ngIf="items.length == 0; else elseBlock"
+      fxLayout="row"
+      fxLayoutAlign="flex-start"
+      fxFill>
+      <div class="cardText" fxLayout="column">
+        <mat-card-title>Click '+' to add an item to your To-Do List!</mat-card-title>
+      </div>
+    </mat-card>
+    <!--When list has items-->
+    <mat-card #elseBlock
+      *ngFor="let item of items; let i = index"
+      fxLayout="row"
+      fxLayoutAlign="flex-start"
+      fxFill>
+      <mat-checkbox ></mat-checkbox>
+      <div class="cardText" fxLayout="column">
+        <mat-card-title><b>{{item.title}}</b></mat-card-title>
+        <mat-card-content>{{item.description}}</mat-card-content>
+      </div>
+      <div class="cardOptions" fxLayout="row" fxLayoutAlign="flex-end">
+        <button mat-button="" (click)="editItem(i)"><mat-icon class="edit">edit</mat-icon></button>
+        <button mat-button="" (click)="deleteItem(i)"><mat-icon class="delete">delete</mat-icon></button>
+      </div>
+    </mat-card>
+  </div>
+  <div class="addContainer" fxLayout="column">
+    <button class="addButton" mat-raised-button (click)="openDialog('', '')"><mat-icon class="add">add</mat-icon></button>
+  </div>
+</div>
+
